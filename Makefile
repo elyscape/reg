@@ -143,19 +143,19 @@ SERVER_ASSETS_DIR := $(CURDIR)/server
 BINDATA_DIR := $(CURDIR)/internal/binutils
 
 .PHONY: generated-assets
-generated-assets: $(BINDATA_DIR)/templates.go $(BINDATA_DIR)/templates.go
+generated-assets: $(BINDATA_DIR)/templates.go $(BINDATA_DIR)/static.go
 
 $(BINDATA_DIR):
 	@mkdir -p $@
 
 $(BINDATA_DIR)/templates.go: $(BINDATA_DIR) $(wildcard *.go) $(wildcard server/templates/*)
 	@$(GO) get -u github.com/jteeuwen/go-bindata/... # update go-bindata tool
-	go-bindata -pkg binutils -prefix "$(SERVER_ASSETS_DIR)" -o $@ $(SERVER_ASSETS_DIR)/templates
+	go-bindata -pkg binutils -prefix "$(SERVER_ASSETS_DIR)" -o $@ $(SERVER_ASSETS_DIR)/templates/...
 	gofmt -s -w $@
 
 $(BINDATA_DIR)/static.go: $(BINDATA_DIR) $(wildcard *.go) $(wildcard server/static/*)
 	@$(GO) get -u github.com/jteeuwen/go-bindata/... # update go-bindata tool
-	go-bindata -pkg binutils -prefix "$(SERVER_ASSETS_DIR)" -o $@ $(SERVER_ASSETS_DIR)/static
+	go-bindata -pkg binutils -prefix "$(SERVER_ASSETS_DIR)" -o $@ $(SERVER_ASSETS_DIR)/static/...
 	gofmt -s -w $@
 
 .PHONY: clean

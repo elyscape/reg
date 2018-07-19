@@ -4,6 +4,7 @@ services:
   - docker
 go:
   - 1.10.x
+go_import_path: github.com/genuinetools/reg
 before_install:
   - go get github.com/golang/lint/golint
   - go get honnef.co/go/tools/cmd/staticcheck

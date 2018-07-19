@@ -149,12 +149,12 @@ $(BINDATA_DIR):
 	@mkdir -p $@
 
 $(BINDATA_DIR)/templates.go: $(BINDATA_DIR) $(wildcard *.go) $(wildcard server/templates/*)
-	@$(GO) get -u github.com/jteeuwen/go-bindata/... # update go-bindata tool
+	@$(GO) get -u github.com/go-bindata/go-bindata/... # update go-bindata tool
 	go-bindata -pkg binutils -prefix "$(SERVER_ASSETS_DIR)" -o $@ $(SERVER_ASSETS_DIR)/templates/...
 	gofmt -s -w $@
 
 $(BINDATA_DIR)/static.go: $(BINDATA_DIR) $(wildcard *.go) $(wildcard server/static/*)
-	@$(GO) get -u github.com/jteeuwen/go-bindata/... # update go-bindata tool
+	@$(GO) get -u github.com/go-bindata/go-bindata/... # update go-bindata tool
 	go-bindata -pkg binutils -prefix "$(SERVER_ASSETS_DIR)" -o $@ $(SERVER_ASSETS_DIR)/static/...
 	gofmt -s -w $@
 
